@@ -1,0 +1,331 @@
+import { supabase } from '../supabase/client';
+
+// ==================== LAPTOPS ====================
+
+export async function getLaptops(filters = {}) {
+  try {
+    let query = supabase
+      .from('laptops')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (filters.status) {
+      query = query.eq('status', filters.status);
+    }
+
+    if (filters.brand) {
+      query = query.eq('brand', filters.brand);
+    }
+
+    if (filters.search) {
+      query = query.or(
+        `asset_id.ilike.%${filters.search}%,brand.ilike.%${filters.search}%,model.ilike.%${filters.search}%,serial_number.ilike.%${filters.search}%`
+      );
+    }
+
+    const { data, error } = await query;
+
+    if (error) throw error;
+
+    return data || [];
+  } catch (error) {
+    console.error('Error fetching laptops:', error);
+    return [];
+  }
+}
+
+export async function createLaptop(laptopData) {
+  try {
+    const { data, error } = await supabase
+      .from('laptops')
+      .insert([laptopData])
+      .select()
+      .single();
+
+    if (error) throw error;
+
+    return { success: true, data };
+  } catch (error) {
+    console.error('Error creating laptop:', error);
+    return { success: false, error: error.message };
+  }
+}
+
+export async function updateLaptop(laptopId, laptopData) {
+  try {
+    const { data, error } = await supabase
+      .from('laptops')
+      .update(laptopData)
+      .eq('laptop_id', laptopId)
+      .select()
+      .single();
+
+    if (error) throw error;
+
+    return { success: true, data };
+  } catch (error) {
+    console.error('Error updating laptop:', error);
+    return { success: false, error: error.message };
+  }
+}
+
+export async function deleteLaptop(laptopId) {
+  try {
+    const { error } = await supabase
+      .from('laptops')
+      .delete()
+      .eq('laptop_id', laptopId);
+
+    if (error) throw error;
+
+    return { success: true };
+  } catch (error) {
+    console.error('Error deleting laptop:', error);
+    return { success: false, error: error.message };
+  }
+}
+
+// ==================== DESKTOPS ====================
+
+export async function getDesktops(filters = {}) {
+  try {
+    let query = supabase
+      .from('desktops')
+      .select(`
+        *,
+        desktop_memory (
+          memory_id,
+          slot_number,
+          size_gb
+        ),
+        desktop_storage (
+          storage_id,
+          storage_type,
+          capacity_gb
+        )
+      `)
+      .order('created_at', { ascending: false });
+
+    if (filters.status) {
+      query = query.eq('status', filters.status);
+    }
+
+    if (filters.search) {
+      query = query.or(
+        `asset_id.ilike.%${filters.search}%,processor.ilike.%${filters.search}%`
+      );
+    }
+
+    const { data, error } = await query;
+
+    if (error) throw error;
+
+    return data || [];
+  } catch (error) {
+    console.error('Error fetching desktops:', error);
+    return [];
+  }
+}
+
+export async function createDesktop(desktopData) {
+  try {
+    const { memory, storage, ...desktop } = desktopData;
+
+    // Insert desktop
+    const { data: desktopResult, error: desktopError } = await supabase
+      .from('desktops')
+      .insert([desktop])
+      .select()
+      .single();
+
+    if (desktopError) throw desktopError;
+
+    // Insert memory modules if provided
+    if (memory && memory.length > 0) {
+      const memoryData = memory.map((m) => ({
+        desktop_id: desktopResult.desktop_id,
+        slot_number: m.slot_number,
+        size_gb: m.size_gb,
+      }));
+
+      const { error: memoryError } = await supabase
+        .from('desktop_memory')
+        .insert(memoryData);
+
+      if (memoryError) throw memoryError;
+    }
+
+    // Insert storage devices if provided
+    if (storage && storage.length > 0) {
+      const storageData = storage.map((s) => ({
+        desktop_id: desktopResult.desktop_id,
+        storage_type: s.storage_type,
+        capacity_gb: s.capacity_gb,
+      }));
+
+      const { error: storageError } = await supabase
+        .from('desktop_storage')
+        .insert(storageData);
+
+      if (storageError) throw storageError;
+    }
+
+    return { success: true, data: desktopResult };
+  } catch (error) {
+    console.error('Error creating desktop:', error);
+    return { success: false, error: error.message };
+  }
+}
+
+export async function updateDesktop(desktopId, desktopData) {
+  try {
+    const { memory, storage, ...desktop } = desktopData;
+
+    // Update desktop
+    const { data: desktopResult, error: desktopError } = await supabase
+      .from('desktops')
+      .update(desktop)
+      .eq('desktop_id', desktopId)
+      .select()
+      .single();
+
+    if (desktopError) throw desktopError;
+
+    // Update memory (delete old, insert new)
+    if (memory) {
+      await supabase.from('desktop_memory').delete().eq('desktop_id', desktopId);
+
+      if (memory.length > 0) {
+        const memoryData = memory.map((m) => ({
+          desktop_id: desktopId,
+          slot_number: m.slot_number,
+          size_gb: m.size_gb,
+        }));
+
+        await supabase.from('desktop_memory').insert(memoryData);
+      }
+    }
+
+    // Update storage (delete old, insert new)
+    if (storage) {
+      await supabase.from('desktop_storage').delete().eq('desktop_id', desktopId);
+
+      if (storage.length > 0) {
+        const storageData = storage.map((s) => ({
+          desktop_id: desktopId,
+          storage_type: s.storage_type,
+          capacity_gb: s.capacity_gb,
+        }));
+
+        await supabase.from('desktop_storage').insert(storageData);
+      }
+    }
+
+    return { success: true, data: desktopResult };
+  } catch (error) {
+    console.error('Error updating desktop:', error);
+    return { success: false, error: error.message };
+  }
+}
+
+export async function deleteDesktop(desktopId) {
+  try {
+    // Delete related memory and storage (should cascade automatically)
+    const { error } = await supabase
+      .from('desktops')
+      .delete()
+      .eq('desktop_id', desktopId);
+
+    if (error) throw error;
+
+    return { success: true };
+  } catch (error) {
+    console.error('Error deleting desktop:', error);
+    return { success: false, error: error.message };
+  }
+}
+
+// ==================== MONITORS ====================
+
+export async function getMonitors(filters = {}) {
+  try {
+    let query = supabase
+      .from('monitors')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (filters.status) {
+      query = query.eq('status', filters.status);
+    }
+
+    if (filters.brand) {
+      query = query.eq('brand', filters.brand);
+    }
+
+    if (filters.search) {
+      query = query.or(
+        `asset_id.ilike.%${filters.search}%,brand.ilike.%${filters.search}%,model.ilike.%${filters.search}%,serial_number.ilike.%${filters.search}%`
+      );
+    }
+
+    const { data, error } = await query;
+
+    if (error) throw error;
+
+    return data || [];
+  } catch (error) {
+    console.error('Error fetching monitors:', error);
+    return [];
+  }
+}
+
+export async function createMonitor(monitorData) {
+  try {
+    const { data, error } = await supabase
+      .from('monitors')
+      .insert([monitorData])
+      .select()
+      .single();
+
+    if (error) throw error;
+
+    return { success: true, data };
+  } catch (error) {
+    console.error('Error creating monitor:', error);
+    return { success: false, error: error.message };
+  }
+}
+
+export async function updateMonitor(monitorId, monitorData) {
+  try {
+    const { data, error } = await supabase
+      .from('monitors')
+      .update(monitorData)
+      .eq('monitor_id', monitorId)
+      .select()
+      .single();
+
+    if (error) throw error;
+
+    return { success: true, data };
+  } catch (error) {
+    console.error('Error updating monitor:', error);
+    return { success: false, error: error.message };
+  }
+}
+
+export async function deleteMonitor(monitorId) {
+  try {
+    const { error } = await supabase
+      .from('monitors')
+      .delete()
+      .eq('monitor_id', monitorId);
+
+    if (error) throw error;
+
+    return { success: true };
+  } catch (error) {
+    console.error('Error deleting monitor:', error);
+    return { success: false, error: error.message };
+  }
+}

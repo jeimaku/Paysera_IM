@@ -1,0 +1,171 @@
+.login-card {
+  background: #ffffff;
+  width: 580px;
+  height: 620px;
+  padding: 56px 48px;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  display: block;
+  background: #0a0aa6;
+  border-radius: 50%;
+}
+
+.login-card h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 32px;
+  color: #1a1a1a;
+  letter-spacing: -0.3px;
+}
+
+.login-card label {
+  display: block;
+  font-size: 18px;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.login-card input {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  background: #f8f8f8;
+  font-size: 14px;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.login-card input::placeholder {
+  color: #999;
+}
+
+.login-card input:focus {
+  outline: none;
+  border-color: #0a0aa6;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(10, 10, 166, 0.1);
+}
+
+.login-card button {
+  width: 100%;
+  padding: 16px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #0a0aa6;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.3px;
+}
+
+.login-card button:hover {
+  background: #0808d4;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(10, 10, 166, 0.3);
+}
+
+.login-card button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(10, 10, 166, 0.2);
+}
+
+.login-page {
+  min-height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  background: linear-gradient(135deg, #5eb3ff 0%, #7dd4b8 100%);
+  overflow: hidden;
+}
+
+/* Left side */
+.login-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 60px 40px 40px;
+}
+
+/* Right side */
+.login-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 40px 40px 40px 20px;
+}
+
+.paysera-logo {
+  width: 100%;
+  max-width: 600px;
+  opacity: 0.95;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.1));
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .login-page {
+    grid-template-columns: 1fr;
+  }
+  
+  .login-right {
+    display: none;
+  }
+  
+  .login-card {
+    width: 90%;
+    max-width: 480px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 36px 28px;
+    border-radius: 16px;
+  }
+  
+  .login-icon {
+    width: 56px;
+    height: 56px;
+  }
+  
+  .login-card h2 {
+    font-size: 15px;
+    margin-bottom: 28px;
+  }
+}

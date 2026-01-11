@@ -1,0 +1,230 @@
+/* Inventory Container */
+.inventory-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 32px;
+  background: #f5f6f8;
+  min-height: 100vh;
+}
+
+/* Header */
+.inventory-header {
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-icon {
+  color: #0a0aa6;
+}
+
+.inventory-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+}
+
+/* Inventory Stats */
+.inventory-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-item {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.stat-available {
+  color: #10b981;
+}
+
+.stat-issued {
+  color: #0a0aa6;
+}
+
+.stat-defective {
+  color: #ef4444;
+}
+
+/* Controls */
+.inventory-controls {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+/* Inventory Table Card */
+.inventory-table-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.asset-id {
+  font-weight: 600;
+  color: #0a0aa6;
+}
+
+.cpu-cell {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Modal Large (for forms with many fields) */
+.modal-large {
+  max-width: 800px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .inventory-container {
+    padding: 20px;
+  }
+
+  .inventory-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-title {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .inventory-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .inventory-controls {
+    flex-direction: column;
+  }
+
+  .search-box {
+    min-width: 100%;
+  }
+
+  .filters {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .filters select,
+  .btn-add {
+    width: 100%;
+  }
+}
+
+/* Remove top padding since we have sidebar */
+.admin-container,
+.employee-container,
+.inventory-container {
+  padding: 32px;
+  margin-left: 0;
+  max-width: 100%;
+}
+
+/* Simplify headers since logout is in sidebar */
+.admin-header,
+.employee-header,
+.inventory-header {
+  margin-bottom: 32px;
+}
+
+/* Hide individual logout buttons if using sidebar */
+.admin-header .logout-btn,
+.employee-header .logout-btn,
+.inventory-header .logout-btn,
+.header-actions .logout-btn {
+  display: none;
+}
+
+/* Keep back button visible */
+.header-actions .btn-back {
+  display: inline-block;
+}
+
+/* Or remove header actions completely if using only sidebar navigation */
+.header-actions {
+  display: none;
+}
+
+/* Desktop Modal Specific Styles */
+.subsection {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 16px;
+}
+
+.subsection-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.subsection-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.btn-icon-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: #0a0aa6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-icon-text:hover {
+  background: #0808d4;
+}
+
+.btn-icon-text:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
