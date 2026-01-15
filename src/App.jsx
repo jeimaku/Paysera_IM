@@ -1,33 +1,40 @@
 import { Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import AdminLayout from './components/Layout/AdminLayout';
+import ITLayout from './components/Layout/ITLayout';
 import Admin from './pages/Admin';
+import IT from './pages/IT';
 import EmployeeManagement from './pages/EmployeeManagement';
 import LaptopInventory from './pages/LaptopInventory';
-import Employee from './pages/Employee';
-import ServiceRequests from './pages/ServiceRequests';
 import DesktopInventory from './pages/DesktopInventory';
-import IT from './pages/IT';
+import ServiceRequests from './pages/ServiceRequests';
+import Employee from './pages/Employee';
 
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
       
-      {/* Admin Routes with Sidebar Layout */}
+      {/* Admin Routes */}
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Admin />} />
         <Route path="employees" element={<EmployeeManagement />} />
         <Route path="laptops" element={<LaptopInventory />} />
-        <Route path="requests" element={<ServiceRequests />} />
         <Route path="desktops" element={<DesktopInventory />} />
-
-        {/* Add more admin routes here */}
+        <Route path="requests" element={<ServiceRequests />} />
       </Route>
 
-      {/* Other Routes */}
+      {/* IT Routes */}
+      <Route path="/it" element={<ITLayout />}>
+        <Route index element={<IT />} />
+        <Route path="laptops" element={<LaptopInventory />} />
+        <Route path="desktops" element={<DesktopInventory />} />
+        <Route path="requests" element={<ServiceRequests />} />
+        {/* More IT routes will be added later */}
+      </Route>
+
+      {/* Employee Routes */}
       <Route path="/employee" element={<Employee />} />
-      <Route path="/it" element={<IT />} />
     </Routes>
   );
 }
