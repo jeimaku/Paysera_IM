@@ -1,0 +1,308 @@
+/* IT Deployment Styles */
+
+/* Deployment Form Card */
+.deployment-form-card {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  margin-bottom: 24px;
+}
+
+.deployment-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+.deployment-step {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 24px;
+  background: #f9fafb;
+}
+
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  color: #1a1a1a;
+}
+
+.step-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.form-select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #374151;
+  background: white;
+  transition: all 0.2s ease;
+}
+
+.form-select:focus {
+  outline: none;
+  border-color: #0a0aa6;
+  box-shadow: 0 0 0 3px rgba(10, 10, 166, 0.1);
+}
+
+.form-select:disabled {
+  background: #f3f4f6;
+  cursor: not-allowed;
+}
+
+/* Device Type Options */
+.device-type-options {
+  display: flex;
+  gap: 16px;
+}
+
+.device-type-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.device-type-option:hover {
+  background: #f3f4f6;
+}
+
+.device-type-option input[type="radio"] {
+  margin: 0;
+}
+
+/* Monitors Grid */
+.monitors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.monitor-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 13px;
+}
+
+.monitor-option:hover {
+  background: #f3f4f6;
+}
+
+.monitor-option input[type="checkbox"] {
+  margin: 0;
+}
+
+/* Deployment Summary */
+.deployment-summary {
+  background: #f0f9ff;
+  border: 1px solid #0ea5e9;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.deployment-summary h3 {
+  color: #0369a1;
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.summary-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.summary-item {
+  font-size: 14px;
+  color: #374151;
+}
+
+/* Deploy Actions */
+.deployment-actions {
+  display: flex;
+  justify-content: center;
+  padding-top: 24px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.btn-deploy {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: #0a0aa6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-deploy:hover:not(:disabled) {
+  background: #0808d4;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(10, 10, 166, 0.3);
+}
+
+.btn-deploy:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Employee Devices Specific Styles */
+.device-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.device-type-badge.laptop {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.device-type-badge.desktop {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.date-cell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.days-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  background: #f3f4f6;
+  color: #374151;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.days-badge.long-term {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.monitors-cell {
+  font-size: 12px;
+  color: #6b7280;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-return {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  background: #fee2e2;
+  color: #dc2626;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-return:hover:not(:disabled) {
+  background: #fecaca;
+}
+
+.btn-return:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* No Data State */
+.no-data-state {
+  text-align: center;
+  padding: 64px 32px;
+  color: #6b7280;
+}
+
+.no-data-icon {
+  margin-bottom: 16px;
+  color: #d1d5db;
+}
+
+.no-data-state h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.no-data-state p {
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .deployment-form-card {
+    padding: 20px;
+  }
+  
+  .deployment-steps {
+    gap: 24px;
+  }
+  
+  .device-type-options {
+    flex-direction: column;
+  }
+  
+  .monitors-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .deployment-actions {
+    padding-top: 20px;
+  }
+  
+  .btn-deploy {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+}

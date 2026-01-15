@@ -75,21 +75,6 @@ export default function ITSidebar() {
         },
       ],
     },
-    {
-      section: 'Requests',
-      items: [
-        {
-          title: 'Service Requests',
-          icon: ClipboardList,
-          path: '/it/requests',
-        },
-        {
-          title: 'Bookings',
-          icon: Calendar,
-          path: '/it/bookings',
-        },
-      ],
-    },
   ];
 
   const handleNavigation = (path) => {

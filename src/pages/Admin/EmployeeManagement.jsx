@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '../supabase/client';
+import { supabase } from '../../supabase/client';
 import { Plus, Edit2, Trash2, Search } from 'lucide-react';
-import EmployeeModal from '../components/Admin/EmployeeModal';
+import EmployeeModal from '../../components/Admin/EmployeeModal';
 import {
   getEmployees,
   createEmployee,
@@ -10,8 +10,8 @@ import {
   deleteEmployee,
   getDepartments,
   getPositions,
-} from '../services/employeeService';
-import '../styles/employee.css';
+} from '../../services/employeeService';
+import '../../styles/employee.css';
 
 export default function EmployeeManagement() {
   const navigate = useNavigate();

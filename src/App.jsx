@@ -1,14 +1,19 @@
 import { Routes, Route } from 'react-router-dom';
-import Login from './pages/Login';
+import Login from './pages/Auth/Login';
 import AdminLayout from './components/Layout/AdminLayout';
 import ITLayout from './components/Layout/ITLayout';
-import Admin from './pages/Admin';
-import IT from './pages/IT';
-import EmployeeManagement from './pages/EmployeeManagement';
-import LaptopInventory from './pages/LaptopInventory';
-import DesktopInventory from './pages/DesktopInventory';
-import ServiceRequests from './pages/ServiceRequests';
-import Employee from './pages/Employee';
+import Admin from './pages/Admin/Admin';
+import IT from './pages/IT/IT';
+import EmployeeManagement from './pages/Admin/EmployeeManagement';
+import LaptopInventory from './pages/Admin/LaptopInventory';
+import DesktopInventory from './pages/Admin/DesktopInventory';
+import MonitorInventory from './pages/Admin/MonitorInventory';
+import DepartmentManagement from './pages/Admin/DepartmentManagement';
+import PositionManagement from './pages/Admin/PositionManagement';
+
+// IT Pages
+import DeployDevice from './pages/IT/DeployDevice';
+import EmployeeDevices from './pages/IT/EmployeeDevices';
 
 export default function App() {
   return (
@@ -21,20 +26,21 @@ export default function App() {
         <Route path="employees" element={<EmployeeManagement />} />
         <Route path="laptops" element={<LaptopInventory />} />
         <Route path="desktops" element={<DesktopInventory />} />
-        <Route path="requests" element={<ServiceRequests />} />
+        <Route path="monitors" element={<MonitorInventory />} />
+        <Route path="departments" element={<DepartmentManagement />} />
+        <Route path="positions" element={<PositionManagement />} />
       </Route>
 
       {/* IT Routes */}
       <Route path="/it" element={<ITLayout />}>
         <Route index element={<IT />} />
+        <Route path="deploy" element={<DeployDevice />} />
+        <Route path="employee-devices" element={<EmployeeDevices />} />
         <Route path="laptops" element={<LaptopInventory />} />
         <Route path="desktops" element={<DesktopInventory />} />
-        <Route path="requests" element={<ServiceRequests />} />
-        {/* More IT routes will be added later */}
+        <Route path="monitors" element={<MonitorInventory />} />
       </Route>
 
-      {/* Employee Routes */}
-      <Route path="/employee" element={<Employee />} />
     </Routes>
   );
 }

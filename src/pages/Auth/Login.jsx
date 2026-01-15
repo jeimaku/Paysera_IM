@@ -1,6 +1,6 @@
-import LoginForm from '../components/Auth/LoginForm'
-import logo from '../assets/logo.png'
-import '../styles/login.css'
+import LoginForm from '../../components/Auth/LoginForm'
+import logo from '../../assets/logo.png'
+import '../../styles/login.css'
 
 export default function Login() {
   return (

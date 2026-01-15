@@ -1,22 +1,19 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { supabase } from '../supabase/client';
-import { Plus, Edit2, Trash2, Search, Laptop as LaptopIcon } from 'lucide-react';
-import LaptopModal from '../components/Admin/LaptopModal';
+import { Plus, Edit2, Trash2, Search, Monitor as MonitorIcon } from 'lucide-react';
+import MonitorModal from '../../components/Admin/MonitorModal';
 import {
-  getLaptops,
-  createLaptop,
-  updateLaptop,
-  deleteLaptop,
-} from '../services/deviceService';
-import '../styles/inventory.css';
+  getMonitors,
+  createMonitor,
+  updateMonitor,
+  deleteMonitor,
+} from '../../services/deviceService';
+import '../../styles/inventory.css';
 
-export default function LaptopInventory() {
-  const navigate = useNavigate();
-  const [laptops, setLaptops] = useState([]);
+export default function MonitorInventory() {
+  const [monitors, setMonitors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedLaptop, setSelectedLaptop] = useState(null);
+  const [selectedMonitor, setSelectedMonitor] = useState(null);
   const [deleteConfirm, setDeleteConfirm] = useState(null);
 
   const [filters, setFilters] = useState({
@@ -26,73 +23,68 @@ export default function LaptopInventory() {
   });
 
   // Get unique brands for filter
-  const brands = [...new Set(laptops.map((l) => l.brand).filter(Boolean))];
+  const brands = [...new Set(monitors.map((m) => m.brand).filter(Boolean))];
 
   useEffect(() => {
-    loadLaptops();
+    loadMonitors();
   }, [filters]);
 
-  const loadLaptops = async () => {
+  const loadMonitors = async () => {
     setLoading(true);
     try {
-      const data = await getLaptops(filters);
-      setLaptops(data);
+      const data = await getMonitors(filters);
+      setMonitors(data);
     } catch (error) {
-      console.error('Error loading laptops:', error);
+      console.error('Error loading monitors:', error);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleAddLaptop = () => {
-    setSelectedLaptop(null);
+  const handleAddMonitor = () => {
+    setSelectedMonitor(null);
     setIsModalOpen(true);
   };
 
-  const handleEditLaptop = (laptop) => {
-    setSelectedLaptop(laptop);
+  const handleEditMonitor = (monitor) => {
+    setSelectedMonitor(monitor);
     setIsModalOpen(true);
   };
 
-  const handleDeleteClick = (laptop) => {
-    setDeleteConfirm(laptop);
+  const handleDeleteClick = (monitor) => {
+    setDeleteConfirm(monitor);
   };
 
   const handleDeleteConfirm = async () => {
     if (!deleteConfirm) return;
 
-    const result = await deleteLaptop(deleteConfirm.laptop_id);
+    const result = await deleteMonitor(deleteConfirm.monitor_id);
 
     if (result.success) {
-      setLaptops((prev) =>
-        prev.filter((laptop) => laptop.laptop_id !== deleteConfirm.laptop_id)
+      setMonitors((prev) =>
+        prev.filter((monitor) => monitor.monitor_id !== deleteConfirm.monitor_id)
       );
       setDeleteConfirm(null);
     } else {
-      alert('Failed to delete laptop: ' + result.error);
+      alert('Failed to delete monitor: ' + result.error);
     }
   };
 
   const handleModalSubmit = async (formData) => {
     let result;
 
-    if (selectedLaptop) {
-      result = await updateLaptop(selectedLaptop.laptop_id, formData);
+    if (selectedMonitor) {
+      result = await updateMonitor(selectedMonitor.monitor_id, formData);
     } else {
-      result = await createLaptop(formData);
+      result = await createMonitor(formData);
     }
 
     if (result.success) {
       setIsModalOpen(false);
-      loadLaptops();
+      loadMonitors();
     } else {
       alert('Error: ' + result.error);
     }
-  };
-
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    navigate('/');
   };
 
   const getStatusColor = (status) => {
@@ -103,63 +95,44 @@ export default function LaptopInventory() {
         return '#0a0aa6';
       case 'defective':
         return '#ef4444';
-      case 'retired':
-        return '#6b7280';
       default:
         return '#6b7280';
     }
-  };
-
-  const formatDate = (dateString) => {
-    if (!dateString) return 'N/A';
-    return new Date(dateString).toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-    });
   };
 
   return (
     <div className="inventory-container">
       <header className="inventory-header">
         <div className="header-title">
-          <LaptopIcon size={32} className="header-icon" />
+          <MonitorIcon size={32} className="header-icon" />
           <div>
-            <h1>Laptop Inventory</h1>
-            <p className="subtitle">Manage laptop devices and specifications</p>
+            <h1>Monitor Inventory</h1>
+            <p className="subtitle">Manage monitor displays and accessories</p>
           </div>
-        </div>
-        <div className="header-actions">
-          <button className="btn-back" onClick={() => navigate('/admin')}>
-            Back to Dashboard
-          </button>
-          <button className="logout-btn" onClick={handleLogout}>
-            Logout
-          </button>
         </div>
       </header>
 
       <div className="inventory-stats">
         <div className="stat-item">
-          <span className="stat-label">Total Laptops</span>
-          <span className="stat-value">{laptops.length}</span>
+          <span className="stat-label">Total Monitors</span>
+          <span className="stat-value">{monitors.length}</span>
         </div>
         <div className="stat-item">
           <span className="stat-label">Available</span>
           <span className="stat-value stat-available">
-            {laptops.filter((l) => l.status === 'available').length}
+            {monitors.filter((m) => m.status === 'available').length}
           </span>
         </div>
         <div className="stat-item">
           <span className="stat-label">Issued</span>
           <span className="stat-value stat-issued">
-            {laptops.filter((l) => l.status === 'issued').length}
+            {monitors.filter((m) => m.status === 'issued').length}
           </span>
         </div>
         <div className="stat-item">
           <span className="stat-label">Defective</span>
           <span className="stat-value stat-defective">
-            {laptops.filter((l) => l.status === 'defective').length}
+            {monitors.filter((m) => m.status === 'defective').length}
           </span>
         </div>
       </div>
@@ -169,7 +142,7 @@ export default function LaptopInventory() {
           <Search size={18} />
           <input
             type="text"
-            placeholder="Search by asset ID, brand, model, or serial number..."
+            placeholder="Search by asset ID, brand, or model..."
             value={filters.search}
             onChange={(e) =>
               setFilters((prev) => ({ ...prev, search: e.target.value }))
@@ -188,7 +161,6 @@ export default function LaptopInventory() {
             <option value="available">Available</option>
             <option value="issued">Issued</option>
             <option value="defective">Defective</option>
-            <option value="retired">Retired</option>
           </select>
 
           <select
@@ -205,16 +177,16 @@ export default function LaptopInventory() {
             ))}
           </select>
 
-          <button className="btn-add" onClick={handleAddLaptop}>
+          <button className="btn-add" onClick={handleAddMonitor}>
             <Plus size={18} />
-            Add Laptop
+            Add Monitor
           </button>
         </div>
       </div>
 
       <div className="inventory-table-card">
         {loading ? (
-          <div className="loading">Loading laptops...</div>
+          <div className="loading">Loading monitors...</div>
         ) : (
           <div className="table-container">
             <table className="data-table">
@@ -223,62 +195,60 @@ export default function LaptopInventory() {
                   <th>Asset ID</th>
                   <th>Brand</th>
                   <th>Model</th>
-                  <th>Serial No.</th>
-                  <th>OS</th>
-                  <th>CPU</th>
-                  <th>RAM (GB)</th>
-                  <th>Storage</th>
-                  <th>Warranty</th>
+                  <th>Model Code</th>
+                  <th>Serial Number</th>
+                  <th>Date Added</th>
                   <th>Status</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {laptops.length === 0 ? (
+                {monitors.length === 0 ? (
                   <tr>
-                    <td colSpan="11" className="no-data">
-                      No laptops found
+                    <td colSpan="8" className="no-data">
+                      No monitors found
                     </td>
                   </tr>
                 ) : (
-                  laptops.map((laptop) => (
-                    <tr key={laptop.laptop_id}>
-                      <td className="asset-id">{laptop.asset_id}</td>
-                      <td>{laptop.brand}</td>
-                      <td>{laptop.model}</td>
-                      <td>{laptop.serial_number || 'N/A'}</td>
-                      <td>{laptop.operating_system || 'N/A'}</td>
-                      <td className="cpu-cell">{laptop.cpu || 'N/A'}</td>
-                      <td>{laptop.memory || 'N/A'}</td>
+                  monitors.map((monitor) => (
+                    <tr key={monitor.monitor_id}>
+                      <td className="asset-id">{monitor.asset_id}</td>
+                      <td>{monitor.brand}</td>
+                      <td>{monitor.model}</td>
+                      <td>{monitor.model_code || 'N/A'}</td>
+                      <td>{monitor.serial_number || 'N/A'}</td>
                       <td>
-                        {laptop.storage
-                          ? `${laptop.storage}GB ${laptop.storage_type || ''}`
+                        {monitor.created_at
+                          ? new Date(monitor.created_at).toLocaleDateString('en-US', {
+                              month: 'short',
+                              day: 'numeric',
+                              year: 'numeric',
+                            })
                           : 'N/A'}
                       </td>
-                      <td>{formatDate(laptop.warranty_end)}</td>
                       <td>
                         <span
                           className="status-badge"
                           style={{
-                            backgroundColor: `${getStatusColor(laptop.status)}20`,
-                            color: getStatusColor(laptop.status),
+                            backgroundColor: `${getStatusColor(monitor.status)}20`,
+                            color: getStatusColor(monitor.status),
                           }}
                         >
-                          {laptop.status}
+                          {monitor.status}
                         </span>
                       </td>
                       <td>
                         <div className="action-buttons">
                           <button
                             className="btn-icon btn-edit"
-                            onClick={() => handleEditLaptop(laptop)}
+                            onClick={() => handleEditMonitor(monitor)}
                             title="Edit"
                           >
                             <Edit2 size={16} />
                           </button>
                           <button
                             className="btn-icon btn-delete"
-                            onClick={() => handleDeleteClick(laptop)}
+                            onClick={() => handleDeleteClick(monitor)}
                             title="Delete"
                           >
                             <Trash2 size={16} />
@@ -294,17 +264,17 @@ export default function LaptopInventory() {
         )}
       </div>
 
-      <LaptopModal
+      <MonitorModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSubmit={handleModalSubmit}
-        laptop={selectedLaptop}
+        monitor={selectedMonitor}
       />
 
       {deleteConfirm && (
         <div className="modal-overlay" onClick={() => setDeleteConfirm(null)}>
           <div className="confirm-dialog" onClick={(e) => e.stopPropagation()}>
-            <h3>Delete Laptop</h3>
+            <h3>Delete Monitor</h3>
             <p>
               Are you sure you want to delete{' '}
               <strong>

@@ -1,15 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '../supabase/client';
-import DashboardStats from '../components/Admin/DashboardStats';
-import ITRequests from '../components/Admin/ITRequests';
-import TodaysBookings from '../components/Admin/TodaysBookings';
+import { supabase } from '../../supabase/client';
+import DashboardStats from '../../components/Admin/DashboardStats';
 import {
   getDashboardStats,
-  getServiceRequests,
-  getTodaysBookings,
-} from '../services/adminService';
-import '../styles/admin.css';
+} from '../../services/adminService';
+import '../../styles/admin.css';
 
 export default function Admin() {
   const navigate = useNavigate();
@@ -18,8 +14,6 @@ export default function Admin() {
     laptopsDeployed: 0,
     pcsDeployed: 0,
   });
-  const [requests, setRequests] = useState([]);
-  const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -29,15 +23,8 @@ export default function Admin() {
   const loadDashboardData = async () => {
     setLoading(true);
     try {
-      const [statsData, requestsData, bookingsData] = await Promise.all([
-        getDashboardStats(),
-        getServiceRequests(),
-        getTodaysBookings(),
-      ]);
-
+      const statsData = await getDashboardStats();
       setStats(statsData);
-      setRequests(requestsData);
-      setBookings(bookingsData);
     } catch (error) {
       console.error('Error loading dashboard:', error);
     } finally {
@@ -76,9 +63,12 @@ export default function Admin() {
 
       <DashboardStats stats={stats} />
 
-      <ITRequests requests={requests} />
-
-      <TodaysBookings bookings={bookings} />
+      {/* TODO: Add admin-specific overview components */}
+      {/* Example: Recent employee additions, inventory summary, etc. */}
+      <div className="section-card">
+        <h2 className="section-title">System Overview</h2>
+        <p>Admin overview functionality will be enhanced here.</p>
+      </div>
     </div>
   );
 }
