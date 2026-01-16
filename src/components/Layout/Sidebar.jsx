@@ -12,6 +12,7 @@ import {
   LogOut,
   Menu,
   X,
+  UserCog,
 } from 'lucide-react';
 import { supabase } from '../../supabase/client';
 import '../../styles/sidebar.css';
@@ -41,6 +42,11 @@ export default function Sidebar() {
           title: 'Employees',
           icon: Users,
           path: '/admin/employees',
+        },
+        {
+          title: 'Employee Devices',
+          icon: UserCog,
+          path: '/admin/employee-devices',
         },
         {
           title: 'Departments',

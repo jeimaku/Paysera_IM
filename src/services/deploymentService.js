@@ -156,6 +156,150 @@ export async function getCurrentDeployments() {
   }
 }
 
+// ==================== DEPLOYMENT HISTORY ====================
+
+// Get complete deployment history with filters
+export async function getDeploymentHistory(filters = {}) {
+  try {
+    let query = supabase
+      .from('employee_devices')
+      .select(`
+        employee_device_id,
+        device_type,
+        device_id,
+        date_issued,
+        date_returned,
+        status,
+        created_at,
+        employees (
+          employee_id,
+          employee_code,
+          full_name,
+          departments (
+            department_name
+          )
+        ),
+        employee_monitors (
+          monitor_id,
+          monitors (
+            asset_id,
+            brand,
+            model,
+            model_code,
+            serial_number
+          )
+        )
+      `)
+      .order('date_issued', { ascending: false });
+
+    // Apply filters
+    if (filters.search) {
+      // Search in employee name or device info
+      query = query.or(
+        `employees.full_name.ilike.%${filters.search}%,employees.employee_code.ilike.%${filters.search}%`
+      );
+    }
+
+    if (filters.deviceType) {
+      query = query.eq('device_type', filters.deviceType);
+    }
+
+    if (filters.status) {
+      query = query.eq('status', filters.status);
+    }
+
+    if (filters.dateRange) {
+      const daysAgo = parseInt(filters.dateRange);
+      const dateThreshold = new Date();
+      dateThreshold.setDate(dateThreshold.getDate() - daysAgo);
+      query = query.gte('date_issued', dateThreshold.toISOString().split('T')[0]);
+    }
+
+    const { data, error } = await query;
+
+    if (error) throw error;
+
+    // Add device asset_id for better display
+    const enrichedData = await Promise.all(
+      (data || []).map(async (deployment) => {
+        try {
+          const tableName = deployment.device_type === 'LAPTOP' ? 'laptops' : 'desktops';
+          const idField = deployment.device_type === 'LAPTOP' ? 'laptop_id' : 'desktop_id';
+          
+          const { data: deviceData, error: deviceError } = await supabase
+            .from(tableName)
+            .select('asset_id')
+            .eq(idField, deployment.device_id)
+            .single();
+
+          if (!deviceError && deviceData) {
+            deployment.device_asset_id = deviceData.asset_id;
+          }
+        } catch (err) {
+          console.warn('Could not fetch asset_id for device:', deployment.device_id);
+        }
+        
+        return deployment;
+      })
+    );
+
+    return enrichedData;
+  } catch (error) {
+    console.error('Error fetching deployment history:', error);
+    return [];
+  }
+}
+
+// ==================== DEVICE SPECIFICATIONS ====================
+
+// Get detailed device specifications for modal
+export async function getDetailedDeviceSpecs(deviceType, deviceId) {
+  try {
+    if (deviceType === 'LAPTOP') {
+      const { data, error } = await supabase
+        .from('laptops')
+        .select('*')
+        .eq('laptop_id', deviceId)
+        .single();
+
+      if (error) throw error;
+      return data;
+    } else if (deviceType === 'DESKTOP') {
+      // Get desktop with memory modules and storage devices
+      const { data, error } = await supabase
+        .from('desktops')
+        .select(`
+          *,
+          desktop_memory (
+            memory_id,
+            slot_number,
+            size_gb
+          ),
+          desktop_storage (
+            storage_id,
+            storage_type,
+            capacity_gb
+          )
+        `)
+        .eq('desktop_id', deviceId)
+        .single();
+
+      if (error) throw error;
+      
+      return {
+        ...data,
+        memory_modules: data.desktop_memory || [],
+        storage_devices: data.desktop_storage || []
+      };
+    }
+    
+    return null;
+  } catch (error) {
+    console.error('Error fetching device specifications:', error);
+    return null;
+  }
+}
+
 // Return device (end deployment)
 export async function returnDevice(employeeDeviceId) {
   try {

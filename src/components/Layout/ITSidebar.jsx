@@ -10,6 +10,7 @@ import {
   ClipboardList,
   Calendar,
   History,
+  RotateCcw,
   LogOut,
   Menu,
   X,
@@ -42,16 +43,25 @@ export default function ITSidebar() {
           title: 'Deploy Device',
           icon: Package,
           path: '/it/deploy',
+          exact: true,
         },
         {
           title: 'Employee Devices',
           icon: Users,
           path: '/it/employee-devices',
+          exact: true,
         },
         {
           title: 'Deployment History',
           icon: History,
           path: '/it/deployment-history',
+          exact: true,
+        },
+        {
+          title: 'Returned Devices',
+          icon: RotateCcw,
+          path: '/it/returned-devices',
+          exact: true,
         },
       ],
     },
@@ -62,16 +72,19 @@ export default function ITSidebar() {
           title: 'Laptops',
           icon: Laptop,
           path: '/it/laptops',
+          exact: true,
         },
         {
           title: 'Desktops',
           icon: HardDrive,
           path: '/it/desktops',
+          exact: true,
         },
         {
           title: 'Monitors',
           icon: Monitor,
           path: '/it/monitors',
+          exact: true,
         },
       ],
     },
@@ -91,7 +104,7 @@ export default function ITSidebar() {
     if (exact) {
       return location.pathname === path;
     }
-    return location.pathname.startsWith(path);
+    return location.pathname === path;
   };
 
   return (

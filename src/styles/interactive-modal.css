@@ -1,0 +1,734 @@
+/* Interactive Device Specification Modal Styles - Paysera Brand Colors */
+
+.interactive-modal-content {
+  position: relative;
+  background: white;
+  border-radius: 20px;
+  width: 90vw;
+  max-width: 1000px;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Header Section - Paysera Blue Gradient */
+.interactive-modal-header {
+  background: linear-gradient(135deg, #0a0aa6 0%, #0808d4 100%);
+  padding: 24px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.device-header-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.device-icon {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+}
+
+.device-icon-svg {
+  color: white;
+}
+
+.device-title h2 {
+  margin: 0 0 8px 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.device-subtitle {
+  margin: 0 0 12px 0;
+  opacity: 0.9;
+  font-size: 14px;
+}
+
+.asset-id-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-weight: 600;
+}
+
+.device-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.modal-close-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+/* Tab Navigation - Consistent with Paysera Colors */
+.tab-navigation {
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0 32px;
+  display: flex;
+  gap: 8px;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+  border-radius: 8px 8px 0 0;
+}
+
+.tab-btn:hover {
+  color: #1e293b;
+  background: #f1f5f9;
+}
+
+.tab-btn.active {
+  color: #0a0aa6;
+  border-bottom-color: #0a0aa6;
+  background: white;
+  font-weight: 600;
+}
+
+/* Modal Body */
+.interactive-modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px;
+  background: #fafafa;
+}
+
+.tab-content {
+  animation: tabFadeIn 0.3s ease-out;
+}
+
+@keyframes tabFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Loading State */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px;
+  color: #6b7280;
+}
+
+.loading-spinner-modern {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #f3f4f6;
+  border-top: 3px solid #0a0aa6;
+  border-radius: 50%;
+  animation: modernSpin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes modernSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Info Cards Grid */
+.info-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.info-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  transition: all 0.2s ease;
+}
+
+.info-card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.card-header svg {
+  color: #0a0aa6;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* Employee Card */
+.employee-details {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.employee-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0a0aa6 0%, #0808d4 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+}
+
+.employee-info h4 {
+  margin: 0 0 4px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.employee-code {
+  margin: 0 0 4px 0;
+  font-size: 12px;
+  color: #6b7280;
+  font-family: 'Monaco', 'Menlo', monospace;
+  background: #f3f4f6;
+  padding: 2px 6px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.employee-dept {
+  margin: 0;
+  font-size: 14px;
+  color: #0a0aa6;
+  font-weight: 500;
+}
+
+/* Timeline Card */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.timeline-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.timeline-dot.deployed {
+  background: #059669;
+}
+
+.timeline-dot.returned {
+  background: #6b7280;
+}
+
+.timeline-dot.active {
+  background: #0a0aa6;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.timeline-content strong {
+  display: block;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 2px;
+}
+
+.timeline-content p {
+  margin: 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* Stats Card */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-value {
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 4px;
+}
+
+.stat-value.active {
+  color: #0a0aa6;
+}
+
+.stat-value.returned {
+  color: #059669;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+/* Specifications */
+.specs-container {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.specs-overview {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  padding: 20px 24px;
+  display: flex;
+  gap: 32px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.overview-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.overview-item svg {
+  color: #0a0aa6;
+}
+
+.specs-sections {
+  padding: 24px;
+}
+
+.specs-section h4 {
+  margin: 0 0 20px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.specs-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.spec-row:last-child {
+  border-bottom: none;
+}
+
+.spec-row label {
+  font-weight: 500;
+  color: #6b7280;
+  min-width: 140px;
+}
+
+.spec-row span {
+  color: #1f2937;
+  font-weight: 500;
+  text-align: right;
+}
+
+.mono {
+  font-family: 'Monaco', 'Menlo', monospace;
+  background: #f3f4f6;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.memory-value, .storage-value {
+  color: #0a0aa6;
+  font-weight: 600;
+}
+
+.warranty-row {
+  background: #fefce8;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 8px 0;
+}
+
+.warranty-status {
+  font-weight: 600;
+}
+
+/* Component Sections */
+.component-section {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 2px solid #f3f4f6;
+}
+
+.component-section h5 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.memory-slots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.memory-slot {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  border: 2px solid #0a0aa6;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.memory-slot:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(10, 10, 166, 0.2);
+}
+
+.slot-header {
+  font-size: 12px;
+  color: #0a0aa6;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.slot-capacity {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0a0aa6;
+}
+
+.storage-devices-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.storage-device-item {
+  background: linear-gradient(135d, #d1fae5 0%, #a7f3d0 100%);
+  border: 2px solid #059669;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.storage-device-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 8px rgba(5, 150, 105, 0.2);
+}
+
+.storage-type {
+  font-size: 14px;
+  font-weight: 600;
+  color: #065f46;
+}
+
+.storage-capacity {
+  font-size: 16px;
+  font-weight: 700;
+  color: #065f46;
+}
+
+.total-summary {
+  background: #f8fafc;
+  border: 2px dashed #0a0aa6;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  font-size: 14px;
+  color: #0a0aa6;
+  font-weight: 600;
+}
+
+/* Monitors Grid */
+.monitors-container {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.monitors-grid-interactive {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.monitor-card-interactive {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border: 1px solid #cbd5e1;
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.monitor-card-interactive:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  border-color: #0a0aa6;
+}
+
+.monitor-card-interactive::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(135deg, #0a0aa6 0%, #0808d4 100%);
+}
+
+.monitor-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.monitor-visual svg {
+  color: #64748b;
+}
+
+.monitor-number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  background: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #e2e8f0;
+}
+
+.monitor-info h4 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+  text-align: center;
+}
+
+.monitor-specs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.monitor-spec {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.monitor-spec label {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.monitor-spec span {
+  color: #1e293b;
+  font-weight: 500;
+}
+
+/* Footer */
+.interactive-modal-footer {
+  background: white;
+  padding: 20px 32px;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-close-modern {
+  background: linear-gradient(135deg, #0a0aa6 0%, #0808d4 100%);
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px -1px rgba(10, 10, 166, 0.3);
+}
+
+.btn-close-modern:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px -3px rgba(10, 10, 166, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .interactive-modal-content {
+    width: 95vw;
+    max-height: 95vh;
+  }
+  
+  .interactive-modal-header {
+    padding: 16px 20px;
+  }
+  
+  .device-header-info {
+    gap: 12px;
+  }
+  
+  .device-icon {
+    padding: 12px;
+  }
+  
+  .device-title h2 {
+    font-size: 20px;
+  }
+  
+  .interactive-modal-body {
+    padding: 20px;
+  }
+  
+  .tab-navigation {
+    padding: 0 20px;
+  }
+  
+  .info-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 3fr;
+    gap: 12px;
+  }
+  
+  .specs-overview {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .memory-slots {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .monitors-grid-interactive {
+    grid-template-columns: 1fr;
+  }
+  
+  .interactive-modal-footer {
+    padding: 16px 20px;
+  }
+}

@@ -1,0 +1,374 @@
+/* Deployment History Specific Styles */
+
+.employee-cell {
+  min-width: 150px;
+}
+
+.employee-cell strong {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.employee-cell small {
+  color: #6b7280;
+  font-size: 11px;
+}
+
+.department-text {
+  color: #0a0aa6 !important;
+  font-weight: 500;
+}
+
+.monitor-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #059669;
+  font-weight: 500;
+}
+
+.text-muted {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.btn-view {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #f0f9ff;
+  color: #0369a1;
+  border: 1px solid #0ea5e9;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-view:hover {
+  background: #e0f2fe;
+  border-color: #0284c7;
+}
+
+/* Device Specification Modal Styles */
+
+.spec-modal-content {
+  position: relative;
+  background: white;
+  border-radius: 16px;
+  width: 90vw;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-subtitle {
+  color: #6b7280;
+  font-size: 14px;
+  margin: 0;
+}
+
+.spec-modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 32px;
+  max-height: calc(90vh - 140px);
+}
+
+.spec-section {
+  margin-bottom: 32px;
+  border-bottom: 1px solid #f3f4f6;
+  padding-bottom: 24px;
+}
+
+.spec-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.section-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.spec-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.spec-item.full-width {
+  grid-column: 1 / -1;
+}
+
+.spec-item label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.spec-value {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+.spec-value small {
+  color: #6b7280;
+  font-weight: 400;
+  margin-left: 8px;
+}
+
+.spec-value.asset-id {
+  font-family: 'Monaco', 'Menlo', monospace;
+  background: #f3f4f6;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.status-active {
+  color: #059669;
+  font-weight: 600;
+}
+
+.status-in_use {
+  color: #0a0aa6 !important;
+  font-weight: 600;
+}
+
+.status-returned {
+  color: #059669 !important;
+  font-weight: 600;
+}
+
+/* Memory Modules Display */
+.memory-modules {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #f8fafc;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.memory-module {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.memory-module:last-child {
+  border-bottom: none;
+}
+
+.memory-module .slot {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.memory-module .size {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.total-memory {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 2px solid #cbd5e1;
+  text-align: right;
+  color: #1e293b;
+}
+
+/* Storage Devices Display */
+.storage-devices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #f0fdf4;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #bbf7d0;
+}
+
+.storage-device {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid #bbf7d0;
+}
+
+.storage-device:last-child {
+  border-bottom: none;
+}
+
+.storage-device .type {
+  color: #059669;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.storage-device .capacity {
+  font-weight: 600;
+  color: #064e3b;
+}
+
+.total-storage {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 2px solid #16a34a;
+  text-align: right;
+  color: #064e3b;
+}
+
+/* Monitor Cards */
+.monitors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.monitor-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  transition: all 0.2s ease;
+}
+
+.monitor-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.monitor-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #cbd5e1;
+}
+
+.monitor-title {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.monitor-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.monitor-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.monitor-item label {
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.monitor-item span {
+  font-size: 13px;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+/* Loading States */
+.modal-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px;
+  color: #6b7280;
+}
+
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #f3f4f6;
+  border-top: 3px solid #0a0aa6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.no-specs {
+  text-align: center;
+  padding: 32px;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .spec-modal-content {
+    width: 95vw;
+    max-height: 95vh;
+  }
+  
+  .spec-modal-body {
+    padding: 0 16px;
+  }
+  
+  .spec-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .monitors-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .memory-modules,
+  .storage-devices {
+    padding: 12px;
+  }
+  
+  .section-header h3 {
+    font-size: 16px;
+  }
+}

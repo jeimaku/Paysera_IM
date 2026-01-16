@@ -1,0 +1,347 @@
+/* Returned Devices Specific Styles - Paysera Branding */
+
+/* Date Range Display */
+.date-range {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.date-separator {
+  color: #0a0aa6;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.date-range .date-cell {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* Return Information */
+.return-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.return-period {
+  color: #0a0aa6;
+  font-weight: 500;
+  font-size: 11px;
+}
+
+/* Days Badge Variants */
+.days-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  min-width: 70px;
+}
+
+.days-badge.short-term {
+  background-color: #dbeafe;
+  color: #1e40af;
+  border: 1px solid #3b82f6;
+}
+
+.days-badge.medium-term {
+  background-color: #fef3c7;
+  color: #92400e;
+  border: 1px solid #f59e0b;
+}
+
+.days-badge.long-term {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #ef4444;
+}
+
+/* Monitor Count for Returned */
+.monitor-count.returned {
+  color: #059669;
+  font-weight: 500;
+  background-color: #d1fae5;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  border: 1px solid #10b981;
+}
+
+/* Results Summary */
+.results-summary {
+  margin-top: 16px;
+  padding: 12px 20px;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #64748b;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+}
+
+.filter-indicator {
+  color: #0a0aa6;
+  font-weight: 600;
+}
+
+/* Enhanced Filters Section */
+.filters {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filters select {
+  min-width: 140px;
+}
+
+/* Clear Filters Button */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background-color: white;
+  color: #6b7280;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
+  color: #374151;
+}
+
+/* Statistics Enhancements */
+.stat-item .stat-value.stat-available {
+  color: #0a0aa6;
+}
+
+.stat-item .stat-value.stat-maintenance {
+  color: #059669;
+}
+
+/* Table Enhancements for Returned Devices */
+.data-table tbody tr:hover {
+  background-color: #f8fafc;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(10, 10, 166, 0.1);
+}
+
+/* Device Type Badge Variations */
+.device-type-badge.laptop {
+  background-color: #dbeafe;
+  color: #1e40af;
+  border: 1px solid #3b82f6;
+}
+
+.device-type-badge.desktop {
+  background-color: #f3e8ff;
+  color: #7c3aed;
+  border: 1px solid #8b5cf6;
+}
+
+/* Employee Cell Enhancement */
+.employee-cell strong {
+  color: #1f2937;
+  font-size: 14px;
+}
+
+.employee-cell small {
+  color: #6b7280;
+  font-size: 11px;
+}
+
+.department-text {
+  color: #0a0aa6 !important;
+  font-weight: 500 !important;
+}
+
+/* Asset ID Enhancement */
+.asset-id {
+  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+  background-color: #f3f4f6;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+}
+
+/* Loading State */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.loading::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  border: 2px solid #f3f4f6;
+  border-top: 2px solid #0a0aa6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* No Data State Enhancement */
+.no-data-state {
+  text-align: center;
+  padding: 64px 32px;
+  color: #6b7280;
+}
+
+.no-data-icon {
+  color: #d1d5db;
+  margin-bottom: 16px;
+}
+
+.no-data-state h3 {
+  color: #374151;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.no-data-state p {
+  font-size: 14px;
+  margin-bottom: 20px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
+}
+
+.no-data-state .btn-primary {
+  background: linear-gradient(135deg, #0a0aa6 0%, #0808d4 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.no-data-state .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(10, 10, 166, 0.3);
+}
+
+/* Enhanced Search Box */
+.search-box {
+  position: relative;
+  flex: 1;
+  min-width: 300px;
+}
+
+.search-box svg {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #0a0aa6;
+  box-shadow: 0 0 0 3px rgba(10, 10, 166, 0.1);
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  .inventory-controls {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+  
+  .search-box {
+    min-width: unset;
+  }
+  
+  .filters {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .filters select,
+  .btn-secondary {
+    width: 100%;
+  }
+  
+  .date-range {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .date-separator {
+    display: none;
+  }
+  
+  .results-summary {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .inventory-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .inventory-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .stat-item {
+    padding: 16px;
+  }
+  
+  .stat-value {
+    font-size: 20px;
+  }
+  
+  .stat-label {
+    font-size: 11px;
+  }
+}
